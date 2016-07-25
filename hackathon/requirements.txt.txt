@@ -1,0 +1,8 @@
+django==1.9.8
+newspaper3k==
+apiclient
+beautifulsoup4==4.5.0
+newspaper3k==0.1.7
+nltk==3.2.1
+wikipedia=1.4.0
+

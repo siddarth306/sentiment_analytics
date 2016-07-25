@@ -1,0 +1,29 @@
+Help build Nagios Exchange for yourself and the entire the Nagios Community by your Nagios project to the site. It's easy - just create an account, login, and add a new listing. Read the FAQ for instructions
+
+Category Listings:
+
+There are 13 Listings in this Category. List your addon or plugin here!
+
+Backupexec Nagios Plugn for reading BackupExec's error log from db. It can be used with NSClient++. You can read the backupexec log querying the db. You need to change the connection string into the script and substitute the sqlistance with the instance nam ... GPL
+
+Backup_Exec This vbscripts reads the logfiles on a NSClient++ and Backup Exec host.
+
+Check Backup Exec Veritas Services Check BackupExec Services with the "check_nt" plugin. It checks Service BackupExecAgentBrowser,BackupExecDeviceMediaService,BackupExecJobEngine and BackupExecRPCService
+
+Check BackupExec Backup Size felipeferreira.net/?p=55 Script to Parse Backup Exec logfile .XML (gets based on today?s date) Calculates how much data was written to Tape and total supposed backup size. The supposed backup size depends, in our case we backup all Disks but the C: and so I calculated in a Dyn ...
+
+Check Error Log Backup Exec 2012 This is a powershell script check to see how many errors are in the BackupExec 2012 Server logs. I just coded it today for my firm and there isn't much error checking in it but let me know and I can see if I can help. This is my first plugin
+
+Check Exchange Backup (BackupExec) felipeferreira.net/?p=55 I wrote a new way of checking Exchange Backups, simple just needed to check the in AD the ?Last time backup? of the Storage Group. I wrote the much simpler and much more precise script to monitor Exchange Servers Backup. It reports Warning if the bac ...
+
+Check_BackupExec hem.bredband.net/Cronstedt/ This plugin checks the status of Backupexec's alert log and generats an Error if there is any error in the Backupexec's error log that is not acknowledged GPL
+
+Check_BackupExecJob_FromDB You can read the status of your backup jobs querying the BackupExec DB (BEDB). With this script you can obtain the list of backup with the following alert: Job Failed; Job Canceled; Media Required. GPL
+
+check_backupexec_active_alerts check Backup Exec Active Alerts This script will check for the active alerts with severity Warning or Error
+
+check_backupexec_backups tkurek.blogspot.com/ This is a Nagios Plugin destined to check the last status and last run of Symantec Backup Exec 2012 job passed as an argument. GPL
+
+Symantec Backup Exec : Blocked Backup This plugins check for blocked backup. We consider a backup blocked (anormally long) if it time is 2 x the average time of the same last backup
+
+Symantec Backup Exec : Various Errors Pour fonctionner correctement, ce plugins se base sur le fait que lorsqu'une sauvegarde est en echec, on la supprime de l'historique du travail et on la relance. Les alertes actives warning et erreur doivent être acquitées.

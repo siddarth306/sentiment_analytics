@@ -1,0 +1,4 @@
+{% extends "analytics\template.html" %}
+{% block maincontent %}
+<p>Hi hello</p>
+{% endblock %}

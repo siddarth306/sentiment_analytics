@@ -1,0 +1,203 @@
+{% extends "analytics\template.html" %}
+
+{% block layout %}
+<!-- Add css styling -->
+<style>
+#container {
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+</style>
+   {% endblock %}
+
+{% block javascript %}
+<!-- Add javascript styling -->
+<script>
+    $(document).ready(function() {
+        $('.mdl-textfield__input').keydown(function(event) {
+            if (event.keyCode == 13) {
+                this.form.submit();
+                return false;
+             }
+    });
+});
+
+
+</script>
+
+
+
+{% endblock %}
+
+
+{% block searchform %}
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable" style="margin-right:45%">
+<label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+  <i class="material-icons">search</i>
+</label>
+  <form action="" class="signin" method="post">
+    {% csrf_token %}
+    <div class="mdl-textfield__expandable-holder">
+    <input class="mdl-textfield__input" type="text" id="search" name="Search">
+    <label class="mdl-textfield__label" for="search">Enter the product...</label>
+    </div>
+  </form>
+
+</div>
+{% endblock %}
+{% block maincontent %}
+
+
+<script>
+
+stats = {{stats|safe}}
+if(stats['status'] == "success")
+    {
+        var score = 0;
+        var temp = 0;
+        for(var ii = 0; ii < stats['result_stats'].length; ii++) {
+            temp = stats['result_stats'][ii][0]/(stats['result_stats'][ii][0]+stats['result_stats'][ii][1])
+            score += temp
+        }
+        score = score/stats['result_stats'].length
+
+var bar = new ProgressBar.Circle(container, {
+  color: '#aaa',
+  // This has to be the same size as the maximum width to
+    // prevent clipping
+  strokeWidth: 4,
+  trailWidth: 1,
+  easing: 'easeInOut',
+  duration: 1400,
+  text: {
+    autoStyleContainer: false
+  },
+  from: { color: '#aaa', width: 1 },
+  to: { color: '#333', width: 4 },
+  // Set default step function for all animate calls
+  step: function(state, circle) {
+    circle.path.setAttribute('stroke', state.color);
+    circle.path.setAttribute('stroke-width', state.width);
+
+    var value = Math.round(Math.round(circle.value() * 100));
+    if (value === 0) {
+      circle.setText('');
+    } else {
+      circle.setText(score*100);
+    }
+
+  }
+});
+bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+bar.text.style.fontSize = '2rem';
+
+bar.animate(score);  // Number from 0.0 to 1.0
+}
+
+
+
+</script>
+
+<script>
+
+</script>
+
+{% endblock %}
+
+{% block p_n_section %}
+             <script src="https://code.highcharts.com/highcharts.js"></script>
+                <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+                <div id="container" style="min-width: 100%; height: 400px; margin: 0 auto"></div>
+              <script>
+                  $(function () {
+    var positive_stats = []
+    var negative_stats =[]
+
+    for(var ii = 0; ii < stats['result_stats'].length; ii++) {
+            positive_stats[ii] = stats['result_stats'][ii][0]
+            negative_stats[ii] = stats['result_stats'][ii][1]
+        }
+    $('#container').highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'Sentiment Type vs Review Trend'
+        },
+        xAxis: {
+            allowDecimals: true,
+            labels: {
+                formatter: function () {
+                    return "Review " + this.value; // clean, unformatted number for year
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Sentiment values'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value ;
+                }
+            }
+        },
+        tooltip: {
+            pointFormat: '{point.y}, {point.x}'
+        },
+        plotOptions: {
+            area: {
+                pointStart: 1,
+                marker: {
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Positive Sentiment',
+            data: positive_stats
+        }, {
+            name: 'Negative Sentiment',
+            data: negative_stats
+        }]
+    });
+});
+              </script>
+          {% endblock %}
+
+            {% block radial %}
+               <div id="indicatorContainer" style="margin-left: 60px;margin-top: -35px;"></div>
+               <script type="text/javascript" src="{{STATIC_URL}}vendor/js/radialIndicator.js"></script>
+               <script type="text/javascript" src="{{STATIC_URL}}vendor/js/radialIndicator.min.js"></script>
+               <script>
+               var score = 0;
+        var temp = 0;
+        for(var ii = 0; ii < stats['result_stats'].length; ii++) {
+            temp = stats['result_stats'][ii][0]/(stats['result_stats'][ii][0]+stats['result_stats'][ii][1])
+            score += temp
+        }
+        score = score/stats['result_stats'].length
+                   $('#indicatorContainer').radialIndicator({
+                    barColor: '#87CEEB',
+                    barWidth: 10,
+                    initValue: 40,
+                    roundCorner : true,
+                    percentage: true
+                });
+                var radialObj = $('#indicatorContainer').data('radialIndicator');
+                //now you can use instance to call different method on the radial progress.
+                //like
+                radialObj.animate(score*100);
+               </script>
+
+               {% endblock %}

@@ -1,0 +1,6 @@
+nltk
+beautifulsoup
+lxml
+wikipedia
+Google apiclient
+newspaper3k

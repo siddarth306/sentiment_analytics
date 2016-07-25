@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>{% block name %} VMA - Hackathon {% endblock %}</title>
+    
+    <!-- javascript files -->
+  <script type="text/javascript" src="{{STATIC_URL}}vendor/js/material.min.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}vendor/js/progressbar.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}vendor/js/circle-progress.js"></script>
+  <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+
+  <!-- css files -->
+  <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}analytics/css/base-template.css" >
+  <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}vendor/css/materialize.css" >
+  <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}vendor/css/materialize.min.css" >
+  <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}vendor/css/style.min.css" >
+  <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}vendor/css/custom.min.css" >
+  <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}vendor/css/morris.css" >
+  <script type="text/javascript" src="{{STATIC_URL}}analytics/js/sentiment.js"></script>
+
+
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+   <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <link rel="stylesheet" href="{{STATIC_URL}}vendor/css/material.min.css">
+   <link rel="stylesheet" href="{{STATIC_URL}}vendor/css/styles.css">
+
+
+   <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+  {% block layout %}
+  {% endblock %}
+
+  {% block javascript %}
+  {% endblock %}
+      <style>
+      .navbar-color {
+        background-color: #00bcd4;
+      }
+      .mdl-layout--fixed-drawer.is-upgraded:not(.is-small-screen)>.mdl-layout__header {
+          margin-left: 440px;
+          width: calc(100% - 440px);
+      }
+
+       .mdl-layout__drawer {
+       width:440px;
+       }
+
+       .mdl-layout--fixed-drawer>.mdl-layout__content {
+       margin-left: 440px;
+       }
+
+        .mdl-textfield .mdl-button {
+        bottom:35px;
+        }
+      </style>
+  </head>
+  <body>
+
+
+
+    {% block maincontent %}
+    {% endblock %}
+
+    {% block maincontent2 %}
+    {% endblock %}
+
+     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+        <div class="mdl-layout__header-row">
+
+          <div class="mdl-layout-spacer"></div>
+
+
+              {% block searchform %}
+
+                {% endblock %}
+
+        </div>
+      </header>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <header class="demo-drawer-header" style="border-bottom: 1px solid #346780">
+          <div class="demo-avatar-dropdown">
+            <h1>Tweets</h1>
+            <div class="mdl-layout-spacer"></div>
+
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+              <li class="mdl-menu__item">hello@example.com</li>
+              <li class="mdl-menu__item">info@example.com</li>
+              <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
+            </ul>
+          </div>
+        </header>
+          {% block tweet %}
+        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800" style="background-color: #263238 !important;box-shadow: none;padding:20px">
+          {% for ii in tweets %}
+          <p style="border-bottom: 1px solid #346780;margin-bottom:10px"><span style="color:#00c4ffbd">{{ii.0}}</span> <span style="color:#ccc">:{{ii.1}}</span></p>
+          {% endfor %}
+            {% endblock %}
+
+
+        </nav>
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid demo-content">
+
+          <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" style="in-width: 700px;min-height: 200px;align-items:flex-start; padding:3%;padding-top:0%">
+            <span>
+              <h3>Wiki</h3>
+              <p style="padding:10;margin:10">{{wiki}}</p>
+                  </span>
+
+          </div>
+          <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
+              {% block p_n_section %}
+             <script src="https://code.highcharts.com/highcharts.js"></script>
+                <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+                <div id="container" style="min-width: 100%; height: 400px; margin: 0 auto"></div>
+              <script>
+                  $(function () {
+
+    $('#container').highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'Sentimment type vs review trend'
+        },
+        xAxis: {
+            allowDecimals: true,
+            labels: {
+                formatter: function () {
+                    return this.value; // clean, unformatted number for year
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Nuclear weapon states'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value ;
+                }
+            }
+        },
+        tooltip: {
+            pointFormat: '{point.y}, {point.x}'
+        },
+        plotOptions: {
+            area: {
+                pointStart: 1,
+                marker: {
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Positive Sentiment',
+            data: [null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640,
+                -1005, -1436, -2063, -3057, 4618, 6444, 9822, 15468, 20434, 24126,
+                27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342, 26662,
+                26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826, 24605,
+                24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586,
+                22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950,
+                10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104]
+        }, {
+            name: 'Negative Sentiment',
+            data: [null, null, null, null, null, null, null, null, null, null,
+                5, 25, 50, 120, 150, 200, 426, 660, 869, 1060, 1605, 2471, 3322,
+                4238, 5221, 6129, 7089, 8339, 9399, 10538, 11643, 13092, 14478,
+                15915, 17385, 19055, 21205, 23044, 25393, 27935, 30062, 32049,
+                33952, 35804, 37431, 39197, 45000, 43000, 41000, 39000, 37000,
+                35000, 33000, 31000, 29000, 27000, 25000, 24000, 23000, 22000,
+                21000, 20000, 19000, 18000, 18000, 17000, 16000]
+        }]
+    });
+});
+              </script>
+          {% endblock %}
+
+          </div>
+          <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+            <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+              <div class="mdl-card__title mdl-card--expand mdl-color--gray-300">
+               {% block radial %}
+               {% endblock %}
+
+              </div>
+              <h3 style="
+                padding: 0;
+                margin: 0 auto;
+                border-top: 1px solid #333;
+            ">Sentiment Analysis Results</h3>
+            </div>
+            <div class="demo-separator mdl-cell--1-col"></div>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  
+    <!-- Footer -->
+  </body>
+</html>

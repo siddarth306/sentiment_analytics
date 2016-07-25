@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block name %} VMA - Hackathon {% endblock %}</title>
+    
+    <!-- javascript files -->
+    <script type="text/javascript" src="{{STATIC_URL}}vendor/js/materialize.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}vendor/js/materialize.min.js"></script>
+  
+    <!-- css files --> 
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}analytics/css/base-template.css" >
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}vendor/css/materialize.css" >
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}vendor/css/materialize.min.css" >
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}vendor/css/style.min.css" >
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}vendor/css/custom.min.css" >
+  
+   <!--{% block layout %}
+   {% endblock %}
+
+   {% block javascript %}
+   {% endblock %}-->
+    
+  </head>
+  <body>
+      <style>/nav
+          .navbar-color {
+            background-color: #00bcd4;
+          }
+      
+      </style>
+  
+        <header id="header" class="page-topbar">
+        <!-- start header nav-->
+        <div class="navbar-fixed">
+            <nav class="navbar-color">
+                <div class="nav-wrapper">
+                    <div class="header-search-wrapper hide-on-med-and-down">
+                        <i class="mdi-action-search"></i>
+                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Type a Product and press 'Enter'">
+                    </div>
+                        </li>
+                      </li>
+                    <!-- translation-button -->
+                    
+                    <!-- notifications-dropdown -->
+                    
+                </div>
+            </nav>
+        </div>
+    {% block maincontent %}
+    {% endblock %}
+
+    {% block maincontent2 %}
+    {% endblock %}
+  
+    <!-- Footer -->
+  </body>
+</html>
